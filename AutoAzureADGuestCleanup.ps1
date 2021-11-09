@@ -47,7 +47,7 @@ ForEach ($Guest in $GuestUsers) {
   $UserObjectId = $Guest.ObjectId
   $created = ($Guest | Select-Object -ExpandProperty ExtensionProperty).createdDateTime
   $AADAccountAge = ($created | New-TimeSpan).Days
-  If ($Guest.mail -notin $excludelist -Or $Guest.DisplayName -notlike "*.maryvale") {
+  If ($Guest.mail -notin $excludelist) {
 
     If ($AADAccountAge -gt $AgeThreshold) {
       start-sleep -Seconds (Get-Random -Minimum 1 -Maximum 15) #sleep a random amount to help avoid "too many requests"
