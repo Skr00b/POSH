@@ -55,7 +55,7 @@ ForEach ($Guest in $GuestUsers) {
       $UserLastLogonDate = $Null
       $UserLastLogonDate = (Get-AzureADAuditSignInLogs -Top 1  -Filter "userid eq '$UserObjectId' and status/errorCode eq 0").CreatedDateTime
       If ($Null -eq $UserLastLogonDate) {
-        #Remove-AzureADUser -ObjectId $UserObjectId -ErrorAction SilentlyContinue #removes the Guest account if above conditions are met
+        Remove-AzureADUser -ObjectId $UserObjectId -ErrorAction SilentlyContinue #removes the Guest account if above conditions are met
         #Records what account was deleted to the Report
         $ReportLine = [PSCustomObject][Ordered]@{
           UPN               = $Guest.UserPrincipalName
